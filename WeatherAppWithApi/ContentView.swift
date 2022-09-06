@@ -47,11 +47,19 @@ struct ContentView: View {
                 VStack {
                     if let forecastInformations = forecastInformations {
                         Text("\(dateFormatter.string(from: forecastInformations.dt))")
-                            .font(.system(size: 20, weight: .heavy, design: .rounded))
+                            .font(.system(size: 24, weight: .heavy, design: .default))
+                            .foregroundColor(.white)
+                            .padding()
+                        Text("\(Int(forecastInformations.main.temp))°")
+                            .font(.system(size: 100, weight: .regular, design: .default))
+                            .foregroundColor(.white)
+                            .frame( alignment: .center)
+                            .padding(.vertical)
+                        Spacer()
+                        Text(forecastInformations.weather[0].description)
+                            .font(.system(size: 25, weight: .heavy, design: .monospaced))
                             .foregroundColor(.white)
                     }
-                    
-                        
                 }
                 Spacer()
             }
@@ -68,7 +76,7 @@ struct ContentView: View {
             }
             if let lat = placemarks?.first?.location?.coordinate.latitude,
                let lon = placemarks?.first?.location?.coordinate.longitude {
-                apiService.getJSON(urlString: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=b05d62ec4560af06a22dc1626dbdab7d", dateDecodingStrategy: .secondsSince1970) {
+                apiService.getJSON(urlString: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&lang=it&units=metric&appid=b05d62ec4560af06a22dc1626dbdab7d", dateDecodingStrategy: .secondsSince1970) {
                     (result: Result<Forecast, APIService.APIError>) in
                     switch result {
                     case .success(let forecast):
