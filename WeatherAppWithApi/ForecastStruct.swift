@@ -23,12 +23,23 @@ struct Forecast : Codable {
     //l'array di tutta quella roba
     let weather : [Weather]
     
+    struct Coord : Codable {
+        let lon : Double
+        let lat : Double
+    }
+    
+    let coord : Coord
+    
     //le temperature
     struct Main : Codable {
-        let temp: Int
-        let temp_min : Int
-        let temp_max : Int
+        let temp: Double
+//        let temp_min : Int
+//        let temp_max : Int
+//        let humidity : Int
     }
+    
+    let main : Main
+    
     let name : String
     let dt : Date
 }
